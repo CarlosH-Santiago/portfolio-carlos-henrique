@@ -89,13 +89,11 @@ export function Portfolio() {
           </Link>
 
           {/* Community (1x2) + Hobbies + Location */}
-          <CommunityCard />
           <HobbiesCard />
-          <LocationCard />
-
           <MapCard />
-          <MusicCard />
+          <CommunityCard />
 
+          <MusicCard />
           {/* Github Activity (2x1) */}
           <GithubCard />
 

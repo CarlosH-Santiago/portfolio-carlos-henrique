@@ -7,7 +7,7 @@ import Image from "next/image";
 export function MusicCard() {
   return (
     <BentoCard
-      className="md:col-span-1 h-[200px] flex flex-col justify-between overflow-hidden group"
+      className="md:col-span-2 h-[200px] flex flex-col justify-between overflow-hidden group"
       delay={0.5}
     >
       {/* Background Animado (Simulação de Equalizador) */}
@@ -29,7 +29,7 @@ export function MusicCard() {
         {/* Iframe do Spotify Compacto */}
         <iframe
           style={{ borderRadius: "12px" }}
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&theme=0" // Playlist Lofi Coding
+          src="https://open.spotify.com/embed/playlist/3v5CwIFBTkJ9SK421B83Qs?utm_source=generator&theme=0" // Playlist Lofi Coding
           width="100%"
           height="80"
           frameBorder="0"
