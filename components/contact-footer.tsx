@@ -1,7 +1,8 @@
 "use client";
 
-import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import { Github, Linkedin, Mail, Instagram, MessageCircleMore } from "lucide-react";
 import { motion } from "framer-motion";
+import { ProposalForm } from "@/components/proposal-form";
 
 const links = [
   { icon: Github, label: "GitHub", href: "https://github.com/CarlosH-Santiago" },
@@ -19,6 +20,7 @@ export function ContactFooter() {
       transition={{ duration: 0.5, delay: 0.6 }}
       className="col-span-full flex flex-col items-center gap-6 rounded-lg border border-border bg-card/80 px-6 py-8 backdrop-blur-sm"
     >
+
       <p className="mb-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         My Contacts
       </p>
@@ -36,6 +38,10 @@ export function ContactFooter() {
           </a>
         ))}
       </div>
+              <br />
+        <ProposalForm />
+
+        <br />
       <p className="font-mono text-xs text-muted-foreground">
          &copy; 2026 by Carlos Santiago. Todos os direitos reservados.
       </p>

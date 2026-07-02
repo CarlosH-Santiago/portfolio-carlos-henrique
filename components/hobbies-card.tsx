@@ -5,7 +5,7 @@ import { BentoCard } from "@/components/bento-card";
 
 export function HobbiesCard() {
   return (
-    <BentoCard delay={0.4}>
+    <BentoCard delay={0.4} className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden ">
       <p className="mb-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         Interests
       </p>

@@ -64,7 +64,7 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
         onClick={toggleModal}
         className={`cursor-pointer group flex h-full flex-col ${className}`}
       >
-        <BentoCard delay={delay} className="h-full w-full flex flex-col justify-between p-5 hover:border-primary/50 transition-all duration-300">
+        <BentoCard delay={delay} className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden  h-full w-full flex flex-col justify-between p-5 hover:border-primary/50 transition-all duration-300">
           
           <div className="flex flex-col flex-grow">
             {/* Banner de Imagem Embutido */}

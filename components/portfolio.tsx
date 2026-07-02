@@ -13,6 +13,10 @@ import { MusicCard } from "@/components/music-card";
 import { ShoppingBag } from "lucide-react";
 import { Droplets } from 'lucide-react';
 import { ExpandableProject, type Project } from "@/components/expandable-project";
+import { ContactCard } from "@/components/contact-card";
+import { ProposalForm } from "@/components/proposal-form";
+import { SiteFooter } from "@/components/site-footer";
+
 
 // 1. A LISTA DE PROJETOS
 const myProjects: Project[] = [
@@ -131,11 +135,30 @@ export function Portfolio() {
           {/* Demais Cards */}
           <HobbiesCard />
           <CommunityCard />
-          <MapCard />
+          <ContactCard />
           <GithubCard />
-          <ContactFooter />
+          <MapCard />
+        </div>
+
+        {/* Seção de Contato Nova (Layout Flex Dinâmico) */}
+      <section id="contact" className="mt-20">
+        <h2 className="text-2xl font-bold mb-6 font-mono text-foreground">Turn your problem into a sophisticated tech solution.</h2>
+        
+        <div className="flex flex-col md:flex-row gap-6 items-stretch">
+
+          {/* Formulário de Proposta (Ocupa TODO O RESTO do espaço disponível) */}
+          <div className="w-full flex-1">
+            <ProposalForm />
+          </div>
           
         </div>
+      </section>
+
+      <br />
+
+        {/* Rodapé Global */}
+        <SiteFooter />
+          
       </div>
     </main>
   );

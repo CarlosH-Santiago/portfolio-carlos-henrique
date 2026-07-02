@@ -12,7 +12,7 @@ const communityItems = [
 
 export function CommunityCard() {
   return (
-    <BentoCard className="md:row-span-2 flex flex-col" delay={0.3}>
+    <BentoCard className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden md:row-span-2 flex flex-col" delay={0.3}>
       <p className="mb-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         Community
       </p>

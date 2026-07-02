@@ -26,7 +26,7 @@ export function GithubCard() {
   }
 
   return (
-    <BentoCard className="md:col-span-2" delay={0.5}>
+    <BentoCard className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden md:col-span-2" delay={0.5}>
       <div className="mb-3 flex items-center justify-between">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
           GitHub Activity

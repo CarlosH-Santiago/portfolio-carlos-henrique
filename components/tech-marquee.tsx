@@ -19,7 +19,7 @@ const technologies = [
 
 export function TechMarquee() {
   return (
-    <BentoCard className="md:col-span-2 overflow-hidden" delay={0.1}>
+    <BentoCard className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl md:col-span-2 overflow-hidden" delay={0.1}>
       <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         Tech Stack
       </p>
