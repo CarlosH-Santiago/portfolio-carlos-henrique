@@ -50,17 +50,6 @@ export function LanguageToggle() {
             transition={{ duration: 0.2 }}
             className="absolute right-0 top-full mt-2 w-36 origin-top-right rounded-xl border border-white/10 bg-zinc-950/90 p-1.5 shadow-2xl backdrop-blur-xl"
           >
-            <button
-              onClick={() => handleSelect("en")}
-              className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-mono transition-colors ${
-                language === "en"
-                  ? "bg-primary/10 text-primary"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              English
-              {language === "en" && <Check className="h-3.5 w-3.5" />}
-            </button>
 
             <button
               onClick={() => handleSelect("pt")}
@@ -73,6 +62,19 @@ export function LanguageToggle() {
               Português
               {language === "pt" && <Check className="h-3.5 w-3.5" />}
             </button>
+            
+            <button
+              onClick={() => handleSelect("en")}
+              className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-mono transition-colors ${
+                language === "en"
+                  ? "bg-primary/10 text-primary"
+                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
+              }`}
+            >
+              English
+              {language === "en" && <Check className="h-3.5 w-3.5" />}
+            </button>
+
           </motion.div>
         )}
       </AnimatePresence>
