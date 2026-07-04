@@ -54,3 +54,18 @@
     text-wrap: balance;
   }
 }
+
+/* Animação para o fundo pontilhado */
+@keyframes pan-grid {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    /* Deve ser exatamente o tamanho do seu backgroundSize */
+    background-position: 24px 24px; 
+  }
+}
+
+.animate-bg-grid {
+  animation: pan-grid 5s linear infinite;
+}

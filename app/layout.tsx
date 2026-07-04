@@ -2,7 +2,8 @@ import React from "react"
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { VisitorCounter } from "@/components/visitor-counter";
-import { SplashScreen } from "@/components/splash-screen"; 
+import { SplashScreen } from "@/components/splash-screen";
+// @ts-ignore: CSS module import declaration missing in project types
 import "./globals.css";
 
 const inter = Inter({

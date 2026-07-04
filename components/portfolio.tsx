@@ -16,6 +16,7 @@ import { ExpandableProject, type Project } from "@/components/expandable-project
 import { ContactCard } from "@/components/contact-card";
 import { ProposalForm } from "@/components/proposal-form";
 import { SiteFooter } from "@/components/site-footer";
+import { ConstellationBackground } from "@/components/constellation-bg";
 
 
 // 1. A LISTA DE PROJETOS
@@ -94,17 +95,9 @@ const myProjects: Project[] = [
 
 export function Portfolio() {
   return (
-    <main className="relative min-h-screen bg-background">
+    <main className="relative min-h-screen">
       {/* Dot pattern background */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, hsl(var(--muted-foreground)) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-        aria-hidden="true"
-      />
+      <ConstellationBackground />
 
       <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
         {/* Header */}
