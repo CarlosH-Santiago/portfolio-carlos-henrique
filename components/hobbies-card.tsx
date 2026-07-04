@@ -2,15 +2,18 @@
 
 import { Music, Gauge } from "lucide-react";
 import { BentoCard } from "@/components/bento-card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function HobbiesCard() {
+  const { t } = useLanguage();
+
   return (
-    <BentoCard delay={0.4} className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden ">
+    <BentoCard delay={0.4} className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
       <p className="mb-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-        Interests
+        {t.hobbies.category}
       </p>
       <h3 className="mb-4 font-mono text-lg font-semibold text-foreground">
-        Beyond Code
+        {t.hobbies.title}
       </h3>
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -21,7 +24,7 @@ export function HobbiesCard() {
         </div>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        Philharmonic Musician & Speed Enthusiast.
+        {t.hobbies.description}
       </p>
     </BentoCard>
   );

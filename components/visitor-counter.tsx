@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function VisitorCounter() {
+  const { t } = useLanguage();
   const [visits, setVisits] = useState<number | null>(null);
 
   useEffect(() => {
@@ -34,10 +36,11 @@ export function VisitorCounter() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
           </div>
-          
+
           <Users className="h-3 w-3" />
           <span>
-            <strong className="text-foreground">{visits.toLocaleString()}</strong> views
+            <strong className="text-foreground">{visits.toLocaleString()}</strong>{" "}
+            {t.visitorCounter.views}
           </span>
         </motion.div>
       )}

@@ -4,22 +4,22 @@ import { useEffect, useState } from "react";
 import { BentoCard } from "@/components/bento-card";
 import { MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Lista de locais para alternar
 const LOCATIONS = [
   {
     name: "Irará, Bahia",
-    // Embed do Google Maps focado em Irará
-    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62442.66986588237!2d-38.8050965768822!3d-12.049487661596765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7144ee817812b39%3A0x6003714c000d603e!2sIrar%C3%A1%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1708123456789!5m2!1spt-BR!2sbr"
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62442.66986588237!2d-38.8050965768822!3d-12.049487661596765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7144ee817812b39%3A0x6003714c000d603e!2sIrar%C3%A1%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1708123456789!5m2!1spt-BR!2sbr",
   },
   {
     name: "Feira de Santana",
-    // Embed do Google Maps focado em Feira
-    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124806.28743831828!2d-39.00685989711624!3d-12.266205912423758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71439dbd0766da9%3A0xed4d58d8cc9d5763!2sFeira%20de%20Santana%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1708123456790!5m2!1spt-BR!2sbr"
-  }
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124806.28743831828!2d-39.00685989711624!3d-12.266205912423758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71439dbd0766da9%3A0xed4d58d8cc9d5763!2sFeira%20de%20Santana%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1708123456790!5m2!1spt-BR!2sbr",
+  },
 ];
 
 export function MapCard() {
+  const { t } = useLanguage();
   const [time, setTime] = useState("");
   const [index, setIndex] = useState(0);
 
@@ -41,7 +41,7 @@ export function MapCard() {
   useEffect(() => {
     const slideTimer = setInterval(() => {
       setIndex((prev) => (prev + 1) % LOCATIONS.length);
-    }, 8000); // Mude aqui o tempo de permanência (8000ms = 8s)
+    }, 8000);
     return () => clearInterval(slideTimer);
   }, []);
 
@@ -64,9 +64,9 @@ export function MapCard() {
       {/* --- Texto da Cidade (Animado) --- */}
       <div className="absolute bottom-4 left-4 z-30">
         <h3 className="text-sm font-bold text-white drop-shadow-md flex items-center gap-1">
-          <MapPin className="h-3 w-3 text-red-500" /> Bahia, Brazil
+          <MapPin className="h-3 w-3 text-red-500" /> {t.location.region}
         </h3>
-        
+
         {/* Animação suave do texto do nome da cidade */}
         <AnimatePresence mode="wait">
           <motion.p
@@ -88,19 +88,18 @@ export function MapCard() {
       <div className="absolute inset-0 z-10 h-full w-full bg-zinc-900">
         <AnimatePresence mode="popLayout">
           <motion.iframe
-            key={LOCATIONS[index].src} // A chave única força o React a recriar o elemento
+            key={LOCATIONS[index].src}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }} // 80% opacidade para manter o estilo dark
+            animate={{ opacity: 0.8 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }} // Duração da transição (1.5s)
-            
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             src={LOCATIONS[index].src}
             width="100%"
             height="100%"
             frameBorder="0"
             title="map"
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: "grayscale(1) invert(1)" }} // Filtro Dark Mode
+            style={{ filter: "grayscale(1) invert(1)" }}
           />
         </AnimatePresence>
       </div>

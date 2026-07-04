@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BentoCard } from "@/components/bento-card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function GithubCard() {
+  const { t } = useLanguage();
   const weeks = 20;
   const days = 7;
 
@@ -11,11 +13,10 @@ export function GithubCard() {
 
   useEffect(() => {
     const randomGrid = Array.from({ length: weeks }, () =>
-    Array.from({ length: days }, () => Math.random())
+      Array.from({ length: days }, () => Math.random())
     );
     setGrid(randomGrid);
   }, []);
-
 
   function getColor(value: number): string {
     if (value < 0.2) return "bg-secondary";
@@ -29,14 +30,14 @@ export function GithubCard() {
     <BentoCard className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden md:col-span-2" delay={0.5}>
       <div className="mb-3 flex items-center justify-between">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          GitHub Activity
+          {t.github.label}
         </p>
         <p className="text-xs text-muted-foreground">
-          Committing code & organizing chaos.
+          {t.github.tagline}
         </p>
       </div>
       <div className="flex gap-1 overflow-hidden min-h-[6rem]" role="img" aria-label="GitHub contribution graph showing high activity">
-        {grid.length === 0 
+        {grid.length === 0
           ? Array.from({ length: weeks }).map((_, wi) => (
               <div key={`loading-${wi}`} className="flex flex-col gap-1">
                 {Array.from({ length: days }).map((_, di) => (
@@ -49,13 +50,11 @@ export function GithubCard() {
                 {week.map((day, di) => (
                   <div
                     key={`${wi}-${di}`}
-                    // Adicionei animate-in e fade-in para dar um efeito suave quando as cores aparecerem
                     className={`h-3 w-3 rounded-sm ${getColor(day)} transition-colors duration-500 animate-in fade-in`}
                   />
                 ))}
               </div>
-            ))
-        }
+            ))}
       </div>
     </BentoCard>
   );

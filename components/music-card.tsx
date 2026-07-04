@@ -3,8 +3,11 @@
 import { BentoCard } from "@/components/bento-card";
 import { Music, Activity, PlayCircle } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function MusicCard() {
+  const { t } = useLanguage();
+
   return (
     <BentoCard
       className="md:col-span-2 h-[200px] flex flex-col justify-between overflow-hidden group relative"
@@ -20,20 +23,20 @@ export function MusicCard() {
             <Music className="h-4 w-4 text-primary" />
           </div>
           <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
-            Coding Vibe
+            {t.music.label}
           </span>
         </div>
         <Activity className="h-4 w-4 text-primary animate-pulse" />
       </div>
 
       <div className="relative z-10 mt-auto flex flex-col">
-        
+
         {/* A Mágica da Affordance: Tooltip flutuante que induz ao clique */}
         <div className="flex justify-end w-full mb-2 pointer-events-none">
           <div className="animate-bounce flex items-center gap-1 rounded-full bg-green-500/10 border border-green-500/20 px-2.5 py-1 backdrop-blur-sm shadow-lg">
             <PlayCircle className="h-3 w-3 text-green-400" />
             <span className="text-[9px] sm:text-[10px] font-bold text-green-400 uppercase tracking-widest">
-              Aumente o som
+              {t.music.tooltip}
             </span>
           </div>
         </div>
@@ -41,7 +44,7 @@ export function MusicCard() {
         {/* Iframe do Spotify Compacto */}
         <iframe
           style={{ borderRadius: "12px" }}
-          src="https://open.spotify.com/embed/playlist/3v5CwIFBTkJ9SK421B83Qs?utm_source=generator&theme=0" // Playlist Lofi Coding
+          src="https://open.spotify.com/embed/playlist/3v5CwIFBTkJ9SK421B83Qs?utm_source=generator&theme=0"
           width="100%"
           height="80"
           frameBorder="0"

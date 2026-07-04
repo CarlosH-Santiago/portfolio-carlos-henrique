@@ -2,8 +2,11 @@
 
 import { MapPin } from "lucide-react";
 import { BentoCard } from "@/components/bento-card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function LocationCard() {
+  const { t } = useLanguage();
+
   return (
     <BentoCard className="relative" delay={0.45}>
       {/* Stylized map background */}
@@ -68,10 +71,10 @@ export function LocationCard() {
           <MapPin className="h-4 w-4" />
         </div>
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          Bahia, Brazil
+          {t.location.region}
         </p>
         <p className="mt-1 text-sm font-medium text-foreground">
-          Based in Feira de Santana / Irará
+          {t.location.city}
         </p>
       </div>
     </BentoCard>

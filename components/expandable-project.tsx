@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { BentoCard } from "./bento-card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export type Project = {
   id: string;
@@ -26,6 +27,7 @@ interface ExpandableProjectProps {
 }
 
 export function ExpandableProject({ project, className, delay = 0 }: ExpandableProjectProps) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -65,18 +67,18 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
         className={`cursor-pointer group flex h-full flex-col ${className}`}
       >
         <BentoCard delay={delay} className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden  h-full w-full flex flex-col justify-between p-5 hover:border-primary/50 transition-all duration-300">
-          
+
           <div className="flex flex-col flex-grow">
             {/* Banner de Imagem Embutido */}
             <motion.div layoutId={`image-${project.id}`} className="relative mb-4 h-32 w-full overflow-hidden rounded-lg bg-secondary">
-              <Image 
-                src={project.mainImage} 
-                alt={project.title} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-110" 
+              <Image
+                src={project.mainImage}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-              
+
               {/* Ícone flutuando na imagem */}
               <motion.div layoutId={`header-${project.id}`} className="absolute top-2 left-2 flex h-8 w-8 items-center justify-center rounded-md bg-black/60 backdrop-blur-md border border-white/10">
                 <project.icon className="h-4 w-4 text-primary" />
@@ -93,11 +95,10 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
               </motion.p>
             </div>
           </div>
-          
-          {/* Rodapé do Card (Duplicação Corrigida) */}
+
+          {/* Rodapé do Card */}
           <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4">
             <div className="flex flex-wrap gap-2">
-              {/* Mostramos no máximo 2 tags para não encavalar com o botão Explorar */}
               {project.tags.slice(0, 2).map((tag) => (
                 <span key={tag} className="rounded-md bg-secondary px-2 py-1 text-[10px] sm:text-xs text-muted-foreground font-medium">
                   {tag}
@@ -106,7 +107,7 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
             </div>
 
             <div className="flex items-center gap-1 transition-all duration-300 md:translate-x-2 md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
-              <span className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider">Explorar</span>
+              <span className="text-[10px] sm:text-xs font-bold text-primary uppercase tracking-wider">{t.projects.explore}</span>
               <ArrowRight className="h-3 w-3 text-primary animate-pulse" />
             </div>
           </div>
@@ -138,17 +139,17 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
 
               <div className="overflow-y-auto">
                 {/* A imagem grande também tem layoutId para a animação conectar com o card pequeno */}
-                <motion.div 
+                <motion.div
                   layoutId={`image-${project.id}`}
                   className="relative h-64 sm:h-80 w-full bg-secondary cursor-pointer group"
                   onClick={() => setLightboxIndex(0)}
                 >
                   <Image src={project.mainImage} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                    <span className="bg-black/60 text-white px-4 py-2 rounded-full text-sm font-medium">Ver em tela cheia</span>
+                    <span className="bg-black/60 text-white px-4 py-2 rounded-full text-sm font-medium">{t.projects.viewFullscreen}</span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none" />
-                  
+
                   <div className="absolute bottom-6 left-6 pointer-events-none">
                     <motion.div layoutId={`header-${project.id}`} className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 backdrop-blur-md border border-white/10">
                       <project.icon className="h-6 w-6 text-primary" />
@@ -170,7 +171,7 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">About the Project</h4>
+                    <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">{t.projects.aboutProject}</h4>
                     <motion.p layoutId={`desc-${project.id}`} className="text-sm sm:text-base leading-relaxed text-zinc-300">
                       {project.longDesc}
                     </motion.p>
@@ -178,11 +179,11 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
 
                   {project.gallery.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">Gallery</h4>
+                      <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">{t.projects.gallery}</h4>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {project.gallery.map((img, i) => (
-                          <div 
-                            key={i} 
+                          <div
+                            key={i}
                             onClick={() => setLightboxIndex(i + 1)}
                             className="relative aspect-video rounded-lg overflow-hidden border border-white/5 bg-secondary cursor-pointer group"
                           >
@@ -198,13 +199,13 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
                     {project.githubUrl && (
                       <a href={project.githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-md bg-secondary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-secondary/80 hover:text-primary">
                         <Github className="h-4 w-4" />
-                        Repository
+                        {t.projects.repository}
                       </a>
                     )}
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
                         <ExternalLink className="h-4 w-4" />
-                        Live Preview
+                        {t.projects.livePreview}
                       </a>
                     )}
                   </div>
@@ -225,7 +226,7 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
             onClick={() => setLightboxIndex(null)}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl"
           >
-            <button 
+            <button
               className="absolute top-6 right-6 z-50 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors"
               onClick={() => setLightboxIndex(null)}
             >
@@ -234,13 +235,13 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
 
             {allImages.length > 1 && (
               <>
-                <button 
+                <button
                   className="absolute left-4 sm:left-10 z-50 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors backdrop-blur-sm"
                   onClick={handlePrevImage}
                 >
                   <ChevronLeft className="h-8 w-8" />
                 </button>
-                <button 
+                <button
                   className="absolute right-4 sm:right-10 z-50 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors backdrop-blur-sm"
                   onClick={handleNextImage}
                 >
@@ -257,11 +258,11 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
                 transition={{ duration: 0.2 }}
                 className="h-full w-full relative"
               >
-                <Image 
-                  src={allImages[lightboxIndex]} 
-                  alt="Fullscreen view" 
-                  fill 
-                  className="object-contain" 
+                <Image
+                  src={allImages[lightboxIndex]}
+                  alt="Fullscreen view"
+                  fill
+                  className="object-contain"
                   quality={100}
                 />
               </motion.div>
