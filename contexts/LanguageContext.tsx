@@ -4,10 +4,9 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 // Passo 1: Importe os novos dicionários aqui
 import { en } from "@/dictionaries/en";
 import { pt } from "@/dictionaries/pt";
-// import { es } from "@/dictionaries/es"; // Exemplo: Espanhol
+import { es } from "@/dictionaries/es";
 
-// Passo 2: Atualize o tipo Language para incluir as novas siglas
-type Language = "en" | "pt"; // | "es" | "de"; // Adicione aqui
+type Language = "en" | "pt" | "es" ;
 
 // O tipo Dictionary usa typeof en como tipo canônico.
 // Cast seguro: pt tem exatamente a mesma estrutura que en (apenas strings diferem).
@@ -18,8 +17,8 @@ type Dictionary = typeof en;
 // gerando literal types incompatíveis entre si, mas a estrutura é idêntica.
 const dictionaryMap: Record<Language, Dictionary> = {
   en: en,
-  pt: pt as unknown as Dictionary,
-  // es: es as unknown as Dictionary, // Adicione aqui
+  pt: pt,
+  es: es,
 };
 
 interface LanguageContextType {
