@@ -75,6 +75,17 @@ export function LanguageToggle() {
               {language === "en" && <Check className="h-3.5 w-3.5" />}
             </button>
 
+<button
+  onClick={() => handleSelect("es")}
+  className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-mono transition-colors ${
+    language === "es" ? "bg-primary/10 text-primary" : "text-zinc-400 hover:bg-white/5 hover:text-white"
+  }`}
+>
+  Español
+  {language === "es" && <Check className="h-3.5 w-3.5" />}
+</button>
+
+
           </motion.div>
         )}
       </AnimatePresence>
