@@ -7,7 +7,7 @@ import { CommunityCard } from "@/components/community-card";
 import { HobbiesCard } from "@/components/hobbies-card";
 import { LocationCard } from "@/components/location-card";
 import { GithubCard } from "@/components/github-card";
-import { ContactFooter } from "@/components/contact-footer";
+import { AboutSection } from "@/components/about-section"; // Importe aqui no topo
 import { MapCard } from "@/components/map-card";
 import { MusicCard } from "@/components/music-card";
 import { ShoppingBag } from "lucide-react";
@@ -121,6 +121,8 @@ export function Portfolio() {
           <HeroCard />
           <TechMarquee />
           <MusicCard />
+
+          <AboutSection />
 
           {/* 2. PROJETOS RENDERIZADOS DINAMICAMENTE */}
           {myProjects.map((proj, index) => (

@@ -8,8 +8,8 @@ import Image from "next/image";
 export function HeroCard() {
   return (
     <BentoCard
-      className="md:col-span-2 md:row-span-2 flex flex-col justify-center"
-      delay={0}
+      className="border border-white/10 bg-zinc-950/50 shadow-2xl backdrop-blur-md md:col-span-2 md:row-span-2 flex flex-col justify-center"
+      delay={0} 
     >
       <div className="flex flex-col items-start gap-6">
         <div className="relative h-24 w-24 rounded-full border-2 border-primary/50 overflow-hidden">
