@@ -6,6 +6,16 @@ import { TypewriterText } from "@/components/typewriter-text";
 import Image from "next/image";
 
 export function HeroCard() {
+  const birthDate = new Date("2006-06-22"); 
+  
+  // 2. Lógica para calcular a idade exata considerando meses e anos bissextos
+  const today = new Date();
+  let currentAge = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    currentAge--;
+  }
   return (
     <BentoCard
       className="border border-white/10 bg-zinc-950/50 shadow-2xl backdrop-blur-md md:col-span-2 md:row-span-2 flex flex-col justify-center"
@@ -35,7 +45,7 @@ export function HeroCard() {
         </div>
 
         <p className="max-w-md text-sm leading-relaxed text-muted-foreground lg:text-base">
-          {"19 years old. Transforming logic into secure, scalable solutions. Let's build your brand update."}
+          {`${currentAge} years old. Transforming logic into secure, scalable solutions. Let's build your brand update.`}
         </p>
 
         <div className="flex flex-wrap gap-3">
