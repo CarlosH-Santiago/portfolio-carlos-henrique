@@ -201,6 +201,14 @@ export const es = {
       long: "Largo plazo (3+ meses)",
       none: "Sin plazo definido",
     },
+    
     submitButton: "Enviar Propuesta",
+  },
+  
+metrics: {
+    projects: { value: "10+", label: "Proyectos Entregados", desc: "Soluciones en producción" },
+    hours: { value: "2500+", label: "Horas de Código", desc: "Dedicadas a la evolución" },
+    techs: { value: "15+", label: "Tecnologías", desc: "Herramientas dominadas" },
+    community: { value: "500+", label: "Devs Impactados", desc: "Liderazgo en comunidad" }
   },
 };

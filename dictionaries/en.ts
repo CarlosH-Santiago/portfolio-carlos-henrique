@@ -201,6 +201,14 @@ export const en = {
       long: "Long term (3+ months)",
       none: "No deadline",
     },
+
     submitButton: "Send Proposal",
+  },
+  
+metrics: {
+    projects: { value: "10+", label: "Projects Delivered", desc: "Solutions in production" },
+    hours: { value: "2500+", label: "Coding Hours", desc: "Dedicated to evolution" },
+    techs: { value: "15+", label: "Technologies", desc: "Mastered tools & frameworks" },
+    community: { value: "500+", label: "Devs Impacted", desc: "Tech community leadership" }
   },
 } as const;

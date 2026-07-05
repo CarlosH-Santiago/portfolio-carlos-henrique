@@ -203,4 +203,11 @@ export const pt = {
     },
     submitButton: "Enviar Proposta",
   },
+  
+metrics: {
+    projects: { value: "10+", label: "Projetos Entregues", desc: "Soluções em produção" },
+    hours: { value: "2500+", label: "Horas de Código", desc: "Dedicadas à evolução" },
+    techs: { value: "15+", label: "Tecnologias", desc: "Ferramentas dominadas" },
+    community: { value: "500+", label: "Devs Impactados", desc: "Liderança em comunidade" }
+  },
 } as const;

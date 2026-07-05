@@ -20,6 +20,7 @@ import { ConstellationBackground } from "@/components/constellation-bg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageToggle } from "@/components/language-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import { MetricsCard } from "./metrics-card";
 
 export function Portfolio() {
   const { t, language } = useLanguage();
@@ -130,7 +131,7 @@ export function Portfolio() {
               ))}
 
               {/* Demais Cards */}
-              <HobbiesCard />
+              <MetricsCard/>
               <CommunityCard />
               <ContactCard />
               <GithubCard />

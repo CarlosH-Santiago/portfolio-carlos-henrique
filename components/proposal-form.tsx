@@ -40,7 +40,7 @@ export function ProposalForm() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+    <div className="w-full h-full flex flex-col rounded-2xl border border-white/10 bg-zinc-950/40  backdrop-blur-md  p-6 sm:p-8 shadow-2xl relative overflow-hidden">
       <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
 
       <h3 className="mb-2 font-mono text-2xl font-bold text-white">{f.title}</h3>

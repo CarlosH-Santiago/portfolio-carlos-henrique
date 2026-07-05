@@ -13,8 +13,11 @@ interface BentoCardProps {
 export function BentoCard({ children, className, delay = 0 }: BentoCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      // Substituímos o animate pelo whileInView
+      whileInView={{ opacity: 1, y: 0 }}
+      // once: true trava na tela após aparecer. margin: -50px força o usuário a rolar um pouco mais para ativar
+      viewport={{ once: true, margin: "-50px" }} 
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       whileHover={{ scale: 1.02 }}
       className={cn(

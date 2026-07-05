@@ -16,7 +16,7 @@ export function ContactCard() {
   const { t } = useLanguage();
 
   return (
-    <BentoCard className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between">
+    <BentoCard className="rounded-2xl border border-white/10  bg-zinc-950/40 backdrop-blur-md  p-6 sm:p-8 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between">
       <div className="flex items-center gap-2 mb-6">
         <div className="p-2 bg-primary/10 rounded-lg">
           <MessageSquare className="h-5 w-5 text-primary" />
