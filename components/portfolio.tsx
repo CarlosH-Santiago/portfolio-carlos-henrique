@@ -79,7 +79,7 @@ export function Portfolio() {
       longDesc: t.projects.items.apiConsumer.longDesc,
       tags: ["Node.js", "Express", "JavaScript", "API Integration"],
       githubUrl: "https://github.com/CarlosH-Santiago/OAT2-Dev-API",
-      mainImage: "/projects/api-main.png",
+      mainImage: "/projects/api-main-new.png",
       gallery: ["/projects/api-1.png"],
       icon: Network,
     },
