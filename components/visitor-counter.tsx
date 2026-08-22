@@ -12,19 +12,30 @@ export function VisitorCounter() {
   useEffect(() => {
     // API gratuita que conta +1 a cada acesso
     fetch("https://api.counterapi.dev/v1/caos-portfolio/visits/up")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
-        setVisits(data.count);
+        if (data && typeof data.count === "number" && !isNaN(data.count)) {
+          setVisits(data.count);
+        } else if (data && typeof data.value === "number" && !isNaN(data.value)) {
+          setVisits(data.value);
+        } else {
+          setVisits(142);
+        }
       })
       .catch((err) => {
-        console.error("Erro no contador", err);
-        setVisits(142); // Número base caso a API caia
+        console.error("Erro no contador:", err);
+        setVisits(142); // Número base caso a API caia ou seja bloqueada
       });
   }, []);
 
   return (
     <AnimatePresence>
-      {visits !== null && (
+      {typeof visits === "number" && !isNaN(visits) && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

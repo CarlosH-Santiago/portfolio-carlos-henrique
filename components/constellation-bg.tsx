@@ -14,11 +14,11 @@ export function ConstellationBackground() {
     let particlesArray: Particle[] = [];
     let animationFrameId: number;
 
-    // Configuração do Mouse
+    // Configuração do Mouse/Touch
     const mouse = {
       x: undefined as number | undefined,
       y: undefined as number | undefined,
-      radius: 150, // Distância que a linha alcança o mouse
+      radius: 150,
     };
 
     const handleMouseMove = (event: MouseEvent) => {
@@ -26,13 +26,22 @@ export function ConstellationBackground() {
       mouse.y = event.clientY;
     };
 
-    const handleMouseOut = () => {
+    const handleTouchMove = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+      }
+    };
+
+    const handlePointerOut = () => {
       mouse.x = undefined;
       mouse.y = undefined;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mouseout", handlePointerOut);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handlePointerOut);
 
     // Ajusta o tamanho do Canvas
     const resizeCanvas = () => {
@@ -59,7 +68,6 @@ export function ConstellationBackground() {
       }
 
       update() {
-        // CORREÇÃO: Usando window.innerWidth e window.innerHeight para evitar o erro de TypeScript
         if (this.x > window.innerWidth || this.x < 0) this.speedX = -this.speedX;
         if (this.y > window.innerHeight || this.y < 0) this.speedY = -this.speedY;
         this.x += this.speedX;
@@ -70,83 +78,89 @@ export function ConstellationBackground() {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(161, 161, 170, 0.3)"; 
+        ctx.fillStyle = "rgba(161, 161, 170, 0.3)";
         ctx.fill();
       }
     }
 
     // Inicializa as partículas
     function init() {
-      particlesArray = [];
-      // CORREÇÃO: Usando window.innerWidth e window.innerHeight
-      const numberOfParticles = (window.innerWidth * window.innerHeight) / 12000;
-      
+      const newParticles: Particle[] = [];
+      const numberOfParticles = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 1.5 + 1;
-        const x = Math.random() * (window.innerWidth - size * 2) + size;
-        const y = Math.random() * (window.innerHeight - size * 2) + size;
-        const speedX = (Math.random() - 0.5) * 0.5; 
+        const x = Math.random() * Math.max(10, window.innerWidth - size * 2) + size;
+        const y = Math.random() * Math.max(10, window.innerHeight - size * 2) + size;
+        const speedX = (Math.random() - 0.5) * 0.5;
         const speedY = (Math.random() - 0.5) * 0.5;
-        particlesArray.push(new Particle(x, y, size, speedX, speedY));
+        newParticles.push(new Particle(x, y, size, speedX, speedY));
       }
+      particlesArray = newParticles;
     }
 
     // Loop de Animação
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
-      ctx?.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      if (!ctx) return;
 
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      const currentParticles = particlesArray;
+      const len = currentParticles.length;
+
+      for (let i = 0; i < len; i++) {
+        const p1 = currentParticles[i];
+        if (!p1) continue;
+
+        p1.update();
+        p1.draw();
 
         // Conecta as partículas entre si
-        for (let j = i; j < particlesArray.length; j++) {
-          const dx = particlesArray[i].x - particlesArray[j].x;
-          const dy = particlesArray[i].y - particlesArray[j].y;
+        for (let j = i + 1; j < len; j++) {
+          const p2 = currentParticles[j];
+          if (!p2) continue;
+
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) { 
-            if (ctx) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(161, 161, 170, ${0.2 - distance / 500})`;
-              ctx.lineWidth = 0.5;
-              ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-              ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-              ctx.stroke();
-            }
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(161, 161, 170, ${0.2 - distance / 500})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
           }
         }
 
-        // Conecta a partícula ao MOUSE
-        if (mouse.x && mouse.y) {
-          const dx = particlesArray[i].x - mouse.x;
-          const dy = particlesArray[i].y - mouse.y;
+        // Conecta a partícula ao ponteiro
+        if (mouse.x !== undefined && mouse.y !== undefined) {
+          const dx = p1.x - mouse.x;
+          const dy = p1.y - mouse.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < mouse.radius) {
-            if (ctx) {
-              ctx.beginPath();
-              //rgba(156, 5, 148, 0.8)
-              ctx.strokeStyle = `rgba(156, 5, 148, ${0.8 - distance / mouse.radius})`; // Verde interativo
-              ctx.lineWidth = 1;
-              ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-              ctx.lineTo(mouse.x, mouse.y);
-              ctx.stroke();
-            }
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(156, 5, 148, ${0.8 - distance / mouse.radius})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
           }
         }
       }
     }
 
-    // Executa o dimensionamento inicial (que já chama o init) e começa a animar
-    resizeCanvas(); 
+    resizeCanvas();
     animate();
 
-    // Limpeza ao sair da página
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("mouseout", handlePointerOut);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handlePointerOut);
       window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };

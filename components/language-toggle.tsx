@@ -21,7 +21,7 @@ export function LanguageToggle() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSelect = (lang: "en" | "pt") => {
+  const handleSelect = (lang: "en" | "pt" | "es") => {
     setLanguage(lang);
     setIsOpen(false);
   };

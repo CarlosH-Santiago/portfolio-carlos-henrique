@@ -17,8 +17,8 @@ type Dictionary = typeof en;
 // gerando literal types incompatíveis entre si, mas a estrutura é idêntica.
 const dictionaryMap: Record<Language, Dictionary> = {
   en: en,
-  pt: pt,
-  es: es,
+  pt: pt as unknown as Dictionary,
+  es: es as unknown as Dictionary,
 };
 
 interface LanguageContextType {
@@ -49,8 +49,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Dicionário ativo selecionado dinamicamente pelo mapa
-  const t = dictionaryMap[language];
+  // Dicionário ativo selecionado dinamicamente pelo mapa com fallback de segurança
+  const t = dictionaryMap[language] || dictionaryMap.pt;
 
   return (
     <LanguageContext.Provider value={{ language, t, setLanguage }}>
