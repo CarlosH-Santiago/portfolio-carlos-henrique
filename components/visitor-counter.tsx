@@ -10,8 +10,9 @@ export function VisitorCounter() {
   const [visits, setVisits] = useState<number | null>(null);
 
   useEffect(() => {
-    // API gratuita que conta +1 a cada acesso
-    fetch("https://api.counterapi.dev/v1/caos-portfolio/visits/up")
+    // API ativa e gratuita que incrementa a cada acesso (+ offset base prévio)
+    const BASE_OFFSET = 140;
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/caos-portfolio-carlos-santiago-2026")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -19,10 +20,9 @@ export function VisitorCounter() {
         return res.json();
       })
       .then((data) => {
-        if (data && typeof data.count === "number" && !isNaN(data.count)) {
-          setVisits(data.count);
-        } else if (data && typeof data.value === "number" && !isNaN(data.value)) {
-          setVisits(data.value);
+        const val = Number(data?.value ?? data?.count);
+        if (!isNaN(val)) {
+          setVisits(BASE_OFFSET + val);
         } else {
           setVisits(142);
         }
