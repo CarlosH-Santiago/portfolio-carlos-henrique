@@ -74,6 +74,9 @@ export const en = {
   },
 
   projects: {
+    sectionTag: "[ 01. featured_projects ]",
+    sectionTitle: "Featured Projects",
+    sectionSubtitle: "Real-world solutions built with a focus on architecture, UI/UX, and impact.",
     sectionHeading: "Turn your problem into a sophisticated tech solution.",
     explore: "Explore",
     viewFullscreen: "View fullscreen",
@@ -111,6 +114,12 @@ export const en = {
           "An academic project developed to master HTTP requests and third-party integrations. It operates on a Node.js/Express backend and uses vanilla JavaScript (Fetch API) to simultaneously consume the PokéAPI for real-time data fetching (GET) and the ReqRes API to simulate a complete CRUD cycle (POST, PUT, DELETE) for a trainer profile.",
       },
     },
+  },
+
+  ecosystem: {
+    sectionTag: "[ 02. ecosystem_&_impact ]",
+    sectionTitle: "Ecosystem & Impact",
+    sectionSubtitle: "Community building, code metrics, engagement, and global presence.",
   },
 
   community: {
@@ -151,6 +160,21 @@ export const en = {
 
   footer: {
     copyright: "© 2026 by Carlos Santiago. All rights reserved.",
+    status: "Available for new projects",
+    navigationTitle: "Navigation",
+    nav: {
+      about: "About",
+      projects: "Projects",
+      ecosystem: "Ecosystem & Impact",
+      contact: "Contact",
+    },
+    socialsTitle: "Connect",
+    backToTop: "Back to top",
+    builtWith: "Built with Next.js 16, React & Tailwind",
+    terminalStatus: "⚡ status: 200 OK | system active",
+    previewSelector: "Footer Layout Preview:",
+    option1Label: "Option 1: Complete",
+    option2Label: "Option 2: Terminal",
   },
 
   visitorCounter: {

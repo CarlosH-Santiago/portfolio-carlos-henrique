@@ -20,6 +20,7 @@ import { ConstellationBackground } from "@/components/constellation-bg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageToggle } from "@/components/language-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeader } from "@/components/section-header";
 import { MetricsCard } from "./metrics-card";
 
 export function Portfolio() {
@@ -107,7 +108,17 @@ export function Portfolio() {
               <TechMarquee />
               <MusicCard />
 
-              <AboutSection />
+              <div id="about" className="md:col-span-4">
+                <AboutSection />
+              </div>
+
+              {/* Seção 1: Projetos */}
+              <SectionHeader
+                id="projects"
+                tag={t.projects.sectionTag}
+                title={t.projects.sectionTitle}
+                subtitle={t.projects.sectionSubtitle}
+              />
 
               {/* Projetos renderizados dinamicamente */}
               {myProjects.map((proj, index) => (
@@ -119,12 +130,20 @@ export function Portfolio() {
                 />
               ))}
 
+              {/* Seção 2: Ecossistema & Impacto */}
+              <SectionHeader
+                id="ecosystem"
+                tag={t.ecosystem.sectionTag}
+                title={t.ecosystem.sectionTitle}
+                subtitle={t.ecosystem.sectionSubtitle}
+              />
+
               {/* Demais Cards */}
-              <MetricsCard/>
               <CommunityCard />
+              <MetricsCard/>
               <ContactCard />
-              <GithubCard />
               <MapCard />
+              <GithubCard />
             </div>
 
             {/* Seção de Contato */}
