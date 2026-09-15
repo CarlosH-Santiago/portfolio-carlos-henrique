@@ -1,107 +1,173 @@
 "use client";
 
-import { Shield, Trophy } from "lucide-react";
-import { Car, Server, Network, Users } from "lucide-react";
-import Link from "next/link";
+import { Shield, Trophy, Car, Server, Network, Users } from "lucide-react";
 import { HeroCard } from "@/components/hero-card";
 import { TechMarquee } from "@/components/tech-marquee";
-import { ProjectCard } from "@/components/project-card";
 import { CommunityCard } from "@/components/community-card";
 import { HobbiesCard } from "@/components/hobbies-card";
 import { LocationCard } from "@/components/location-card";
 import { GithubCard } from "@/components/github-card";
-import { ContactFooter } from "@/components/contact-footer";
+import { AboutSection } from "@/components/about-section";
 import { MapCard } from "@/components/map-card";
 import { MusicCard } from "@/components/music-card";
+import { ShoppingBag } from "lucide-react";
+import { Droplets } from "lucide-react";
+import { ExpandableProject, type Project } from "@/components/expandable-project";
+import { ContactCard } from "@/components/contact-card";
+import { ProposalForm } from "@/components/proposal-form";
+import { SiteFooter } from "@/components/site-footer";
+import { ConstellationBackground } from "@/components/constellation-bg";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/language-toggle";
+import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeader } from "@/components/section-header";
+import { MetricsCard } from "./metrics-card";
 
 export function Portfolio() {
+  const { t, language } = useLanguage();
+
+  // Lista de projetos com textos vindos do dicionário
+  const myProjects: Project[] = [
+    {
+      id: "ecoquintal",
+      title: "EcoQuintal",
+      shortDesc: t.projects.items.ecoquintal.shortDesc,
+      longDesc: t.projects.items.ecoquintal.longDesc,
+      tags: ["React", "UI/UX", "3D Design", "Sustainability"],
+      liveUrl: "https://ecoquintal.vercel.app",
+      mainImage: "/projects/ecoquintal-main.png",
+      gallery: ["/projects/ecoquintal-1.png", "/projects/ecoquintal-2.png"],
+      icon: Droplets,
+    },
+    {
+      id: "siconecta",
+      title: "SI CONECTA",
+      shortDesc: t.projects.items.siconecta.shortDesc,
+      longDesc: t.projects.items.siconecta.longDesc,
+      tags: ["Web", "Community", "Event Mgmt"],
+      githubUrl: "https://github.com/CarlosH-Santiago/SI_CONECTA",
+      mainImage: "/projects/siconecta-main.png",
+      gallery: ["/projects/siconecta-1.png"],
+      icon: Users,
+    },
+    {
+      id: "atelier",
+      title: "Atelier E-Commerce",
+      shortDesc: t.projects.items.atelier.shortDesc,
+      longDesc: t.projects.items.atelier.longDesc,
+      tags: ["React", "Node.js", "MongoDB", "Tailwind", "JWT"],
+      githubUrl: "https://github.com/CarlosH-Santiago/Trabalho-de-Interfaces",
+      liveUrl: "https://atelier-puce-xi.vercel.app",
+      mainImage: "/projects/atelier-main.png",
+      gallery: ["/projects/atelier-1.png", "/projects/atelier-2.png"],
+      icon: ShoppingBag,
+    },
+    {
+      id: "combustion",
+      title: "Combustion Analytics",
+      shortDesc: t.projects.items.combustion.shortDesc,
+      longDesc: t.projects.items.combustion.longDesc,
+      tags: ["Kotlin", "Android", "Material Design", "Retrofit"],
+      githubUrl: "https://github.com/CarlosH-Santiago/CombustionCarApp_DIO_Cognizant",
+      mainImage: "/projects/combustion-main.jpg",
+      gallery: ["/projects/combustion-1.jpg", "/projects/combustion-2.jpg"],
+      icon: Car,
+    },
+  ];
+
   return (
-    <main className="relative min-h-screen bg-background">
+    <main className="relative min-h-screen">
       {/* Dot pattern background */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, hsl(var(--muted-foreground)) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-        aria-hidden="true"
-      />
+      <ConstellationBackground />
 
       <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
-        {/* Header */}
-        <header className="mb-10">
+        {/* Header — fica FORA da animação para não piscar ao trocar idioma */}
+        <header className="mb-10 flex items-center justify-between">
           <p className="font-mono text-sm text-muted-foreground">
-            {"~/portfolio"}
-            <span className="ml-1 inline-block h-4 w-1.5 animate-pulse bg-accent align-middle" />
+            {"~/portfolio/carlos-santiago.dev"}
+            <span className="ml-1 inline-block h-4 w-1.5 animate-pulse bg-primary align-middle" />
           </p>
+
+          {/* Seletor de idioma */}
+          <LanguageToggle />
         </header>
 
-        {/* Bento Grid */}
-        <div className="grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-4">
-          {/* Row 1-2: Hero (2x2) + Tech Marquee (2x1) stacked with projects */}
-          <HeroCard />
-          <TechMarquee />
+        {/* Blur Fade global — monta/desmonta toda a página ao trocar o idioma */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={language}
+            initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            {/* Bento Grid */}
+            <div className="grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-4">
 
-          {/* Projects */}
-          {/* Projeto 1: App de Carros (Combustion) */}
-          <Link href="https://github.com/CarlosH-Santiago/CombustionCarApp_DIO_Cognizant" target="_blank">
-            <ProjectCard
-              icon={Car}
-              title="Combustion Analytics"
-              description="Mobile simulation app for automotive combustion analysis built with Kotlin."
-              tags={["Kotlin", "Android", "Simulation"]}
-              delay={0.1}
-            />
-          </Link>
+              <HeroCard />
+              <TechMarquee />
+              <MusicCard />
 
-          {/* Projeto 2: API (Backend) */}
-          <Link href="https://github.com/CarlosH-Santiago/OAT2-Dev-API" target="_blank">
-            <ProjectCard
-              icon={Server}
-              title="Dev Management API"
-              description="Scalable RESTful API architecture for developer resource management."
-              tags={["JavaScript", "Node.js", "RESTful API"]}
-              delay={0.2}
-            />
-          </Link>
+              <div id="about" className="md:col-span-4">
+                <AboutSection />
+              </div>
 
-          {/* Projeto 3: Sockets TCP (Hard Skill) */}
-          <Link href="https://github.com/CarlosH-Santiago/Drive-de-Arquivos-com-Sockets-TCP-em-Java" target="_blank">
-            <ProjectCard
-              icon={Network}
-              title="TCP File Drive"
-              description="High-performance file transfer system built from scratch using raw Java Sockets."
-              tags={["Java", "Networking", "TCP/IP"]}
-              delay={0.3}
-            />
-          </Link>
+              {/* Seção 1: Projetos */}
+              <SectionHeader
+                id="projects"
+                tag={t.projects.sectionTag}
+                title={t.projects.sectionTitle}
+                subtitle={t.projects.sectionSubtitle}
+              />
 
-          {/* Projeto 4: SI Conecta (Comunidade) */}
-          <Link href="https://github.com/CarlosH-Santiago/SI_CONECTA" target="_blank">
-            <ProjectCard
-              icon={Users}
-              title="SI CONECTA"
-              description="Digital ecosystem bridging Information Systems students and academic events."
-              tags={["Web", "Community", "Event Mgmt"]}
-              delay={0.4}
-            />
-          </Link>
+              {/* Projetos renderizados dinamicamente */}
+              {myProjects.map((proj, index) => (
+                <ExpandableProject
+                  key={proj.id}
+                  project={proj}
+                  className="md:col-span-1"
+                  delay={0.1 + index * 0.1}
+                />
+              ))}
 
-          {/* Community (1x2) + Hobbies + Location */}
-          <CommunityCard />
-          <HobbiesCard />
-          <LocationCard />
+              {/* Seção 2: Ecossistema & Impacto */}
+              <SectionHeader
+                id="ecosystem"
+                tag={t.ecosystem.sectionTag}
+                title={t.ecosystem.sectionTitle}
+                subtitle={t.ecosystem.sectionSubtitle}
+              />
 
-          <MapCard />
-          <MusicCard />
+              {/* Demais Cards */}
+              <CommunityCard />
+              <MetricsCard/>
+              <ContactCard />
+              <MapCard />
+              <GithubCard />
+            </div>
 
-          {/* Github Activity (2x1) */}
-          <GithubCard />
+            {/* Seção de Contato */}
+            <section id="contact" className="mt-20">
+              <h2 className="text-2xl font-bold mb-6 font-mono text-foreground">
+                {t.projects.sectionHeading}
+              </h2>
 
-          {/* Contact Footer */}
-          <ContactFooter />
-        </div>
+              <div className="flex flex-col md:flex-row gap-6 items-stretch">
+                {/* Formulário de Proposta */}
+                <div className="w-full flex-1">
+                  <ProposalForm />
+                </div>
+              </div>
+            </section>
+
+            <br />
+
+            {/* Rodapé Global */}
+            <SiteFooter />
+
+          </motion.div>
+        </AnimatePresence>
+
       </div>
     </main>
   );

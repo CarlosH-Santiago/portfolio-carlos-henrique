@@ -1,7 +1,10 @@
 import React from "react"
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-
+import { VisitorCounter } from "@/components/visitor-counter";
+import { SplashScreen } from "@/components/splash-screen";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+// @ts-ignore: CSS module import declaration missing in project types
 import "./globals.css";
 
 const inter = Inter({
@@ -30,8 +33,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`dark scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased">
+        <LanguageProvider>
+          <SplashScreen />
+          {children}
+          <VisitorCounter />
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
+
