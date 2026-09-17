@@ -85,6 +85,12 @@ export const en = {
     repository: "Repository",
     livePreview: "Live Preview",
     items: {
+      draHelena: {
+        shortDesc:
+          "High-conversion landing page for an aesthetic dentistry and facial harmonization clinic.",
+        longDesc:
+          "High-conversion institutional landing page designed for a premier dental clinic specializing in smile aesthetics and facial harmonization. Built with React 18, TypeScript, Vite, and Tailwind CSS, featuring Single Source of Truth architecture, interactive Before & After comparison slider, testimonials carousel, dynamic FAQ accordion, and floating WhatsApp appointment booking. Developed with strict Mobile-First principles, WCAG AA accessibility, and dental board regulatory compliance.",
+      },
       ecoquintal: {
         shortDesc: "Smart domestic water reuse system and interactive guide.",
         longDesc:

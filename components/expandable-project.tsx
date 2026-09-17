@@ -19,6 +19,7 @@ export type Project = {
   mainImage: string;
   gallery: string[];
   icon: any;
+  colSpan?: string;
 };
 
 interface ExpandableProjectProps {
@@ -80,7 +81,7 @@ export function ExpandableProject({ project, className, delay = 0 }: ExpandableP
       <motion.div
         layoutId={`card-${project.id}`}
         onClick={toggleModal}
-        className={`cursor-pointer group flex h-full flex-col ${className}`}
+        className={`cursor-pointer group flex h-full flex-col ${project.colSpan || "md:col-span-1"} ${className || ""}`}
       >
         <BentoCard delay={delay} className="rounded-2xl border border-white/10 bg-zinc-950/40 backdrop-blur-md p-6 sm:p-8 shadow-2xl relative overflow-hidden h-full w-full flex flex-col justify-between hover:border-primary/40 hover:bg-zinc-900/50 transition-all duration-300">
           <div className="flex flex-col flex-grow">

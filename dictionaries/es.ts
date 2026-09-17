@@ -85,6 +85,12 @@ export const es = {
     repository: "Repositorio",
     livePreview: "Ver en Vivo",
     items: {
+      draHelena: {
+        shortDesc:
+          "Landing page institucional de alta conversión para clínica de odontología estética y armonización facial.",
+        longDesc:
+          "Landing page institucional de alta conversión desarrollada para clínica odontológica especializada en estética dental y armonización orofacial. Construida con React 18, TypeScript, Vite y Tailwind CSS, implementa arquitectura Single Source of Truth, slider interactivo de Antes y Después, carrusel de testimonios, acordeón dinámico de FAQ y botón flotante para reservas directas por WhatsApp. Desarrollada con estándares Mobile-First estrictos, accesibilidad WCAG AA y cumplimiento de directrices técnicas y regulatorias.",
+      },
       ecoquintal: {
         shortDesc: "Sistema inteligente de reutilización de agua doméstica y guía interactiva.",
         longDesc:

@@ -1,6 +1,6 @@
 "use client";
 
-import { Shield, Trophy, Car, Server, Network, Users } from "lucide-react";
+import { Shield, Trophy, Car, Server, Network, Users, Sparkles } from "lucide-react";
 import { HeroCard } from "@/components/hero-card";
 import { TechMarquee } from "@/components/tech-marquee";
 import { CommunityCard } from "@/components/community-card";
@@ -29,6 +29,24 @@ export function Portfolio() {
   // Lista de projetos com textos vindos do dicionário
   const myProjects: Project[] = [
     {
+      id: "dra-helena",
+      title: "Dra. Helena — Estética Dental",
+      shortDesc: t.projects.items.draHelena.shortDesc,
+      longDesc: t.projects.items.draHelena.longDesc,
+      tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "UI/UX"],
+      githubUrl: "https://github.com/CarlosH-Santiago/Landing-Page-Estetica-Dental",
+      liveUrl: "https://dra-helena-estetica-dental.vercel.app",
+      mainImage: "/projects/dra-helena-main.png",
+      gallery: [
+        "/projects/dra-helena-1.png",
+        "/projects/dra-helena-2.png",
+        "/projects/dra-helena-3.png",
+        "/projects/dra-helena-4.png",
+      ],
+      icon: Sparkles,
+      colSpan: "md:col-span-2",
+    },
+    {
       id: "ecoquintal",
       title: "EcoQuintal",
       shortDesc: t.projects.items.ecoquintal.shortDesc,
@@ -38,6 +56,7 @@ export function Portfolio() {
       mainImage: "/projects/ecoquintal-main.png",
       gallery: ["/projects/ecoquintal-1.png", "/projects/ecoquintal-2.png"],
       icon: Droplets,
+      colSpan: "md:col-span-1",
     },
     {
       id: "siconecta",
@@ -49,6 +68,7 @@ export function Portfolio() {
       mainImage: "/projects/siconecta-main.png",
       gallery: ["/projects/siconecta-1.png"],
       icon: Users,
+      colSpan: "md:col-span-1",
     },
     {
       id: "atelier",
@@ -61,6 +81,7 @@ export function Portfolio() {
       mainImage: "/projects/atelier-main.png",
       gallery: ["/projects/atelier-1.png", "/projects/atelier-2.png"],
       icon: ShoppingBag,
+      colSpan: "md:col-span-2",
     },
     {
       id: "combustion",
@@ -72,6 +93,7 @@ export function Portfolio() {
       mainImage: "/projects/combustion-main.jpg",
       gallery: ["/projects/combustion-1.jpg", "/projects/combustion-2.jpg"],
       icon: Car,
+      colSpan: "md:col-span-2",
     },
   ];
 
@@ -125,8 +147,7 @@ export function Portfolio() {
                 <ExpandableProject
                   key={proj.id}
                   project={proj}
-                  className="md:col-span-1"
-                  delay={0.1 + index * 0.1}
+                  delay={0.1 + index * 0.08}
                 />
               ))}
 
