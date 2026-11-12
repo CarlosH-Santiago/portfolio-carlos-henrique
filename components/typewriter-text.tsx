@@ -40,14 +40,20 @@ export function TypewriterText({
   }, [index, text, speed, prefersReducedMotion]);
 
   return (
-    <span className={className}>
-      {displayed}
-      {index < text.length && (
-        <span
-          aria-hidden="true"
-          className="inline-block w-0.5 h-6 bg-accent animate-pulse ml-0.5 align-middle"
-        />
-      )}
+    <span className={`relative inline-block ${className || ""}`}>
+      {/* Reserva a geometria exata do texto completo para evitar Layout Shift e ghosting de GPU */}
+      <span className="invisible select-none" aria-hidden="true">
+        {text}
+      </span>
+      <span className="absolute left-0 top-0 right-0 bottom-0">
+        {displayed}
+        {index < text.length && (
+          <span
+            aria-hidden="true"
+            className="inline-block w-0.5 h-6 bg-accent animate-pulse ml-0.5 align-middle"
+          />
+        )}
+      </span>
     </span>
   );
 }

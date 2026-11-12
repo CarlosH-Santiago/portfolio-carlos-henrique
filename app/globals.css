@@ -88,9 +88,8 @@
   --reveal-y: 50%;
   --reveal-radius: 0px;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
   isolation: isolate;
-  contain: paint;
 }
 
 .reveal-hover__image--base {

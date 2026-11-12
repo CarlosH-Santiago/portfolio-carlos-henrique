@@ -1,7 +1,7 @@
 export const es = {
   hero: {
     role: "Ingeniero de Software Full Stack",
-    bio: "Transformando lógica de negocio compleja en arquitecturas seguras, escalables e interfaces de alto rendimiento.",
+    bio: "{age} años. Transformando lógica en soluciones seguras y escalables. Actualicemos tu marca.",
     downloadCv: "Descargar CV",
     contactMe: "Contáctame",
   },
