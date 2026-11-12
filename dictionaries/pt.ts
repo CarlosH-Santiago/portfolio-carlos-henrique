@@ -1,7 +1,7 @@
 export const pt = {
   hero: {
     role: "Engenheiro de Software Full Stack",
-    bio: "{age} anos. Transformando lógica em soluções seguras e escaláveis. Vamos atualizar a sua marca.",
+    bio: "Transformando regras de negócio complexas em arquiteturas seguras, escaláveis e interfaces de alta performance.",
     downloadCv: "Baixar CV",
     contactMe: "Entre em Contato",
   },
@@ -157,6 +157,13 @@ export const pt = {
   github: {
     label: "Atividade no GitHub",
     tagline: "Commitando código & organizando o caos.",
+    contributions: "Contribuições",
+    repos: "Repos",
+    followers: "Seguidores",
+    less: "Menos",
+    more: "Mais",
+    viewProfile: "Ver perfil no GitHub",
+    contributionsAlt: "Gráfico de contribuições reais de CarlosH-Santiago no GitHub",
   },
 
   music: {
@@ -165,6 +172,7 @@ export const pt = {
   },
 
   footer: {
+    bio: "Engenheiro de Software Full Stack dedicado a projetar arquiteturas seguras, microsserviços escaláveis e experiências digitais de alta performance.",
     copyright: "© 2026 por Carlos Santiago. Todos os direitos reservados.",
     status: "Disponível para novos projetos",
     navigationTitle: "Navegação",
@@ -176,15 +184,8 @@ export const pt = {
     },
     socialsTitle: "Conexões",
     backToTop: "Voltar ao topo",
-    builtWith: "Desenvolvido com Next.js 16, React & Tailwind",
+    builtWith: "Desenvolvido com Next.js, React, TypeScript & Tailwind CSS",
     terminalStatus: "⚡ status: 200 OK | sistema ativo",
-    previewSelector: "Pré-visualizar Rodapé:",
-    option1Label: "Opção 1: Completo",
-    option2Label: "Opção 2: Terminal",
-  },
-
-  visitorCounter: {
-    views: "visualizações",
   },
 
   proposalForm: {
@@ -209,10 +210,10 @@ export const pt = {
     },
     projectTypeOptions: {
       placeholder: "Selecione...",
-      webApp: "Aplicação Web",
-      mobileApp: "Aplicativo Mobile",
-      landingPage: "Landing Page",
-      other: "Outro",
+      webApp: "Sistema Web / SaaS",
+      mobileApp: "Aplicativo Mobile (Android/Kotlin)",
+      landingPage: "Landing Page de Alta Conversão",
+      other: "API / Arquitetura Backend",
     },
     budgetOptions: {
       placeholder: "Selecione...",
@@ -232,12 +233,14 @@ export const pt = {
       none: "Sem prazo definido",
     },
     submitButton: "Enviar Proposta",
+    successMessage: "Proposta enviada com sucesso! Retornarei em breve.",
+    errorMessage: "Não foi possível enviar a proposta agora. Tente novamente ou chame no WhatsApp.",
   },
-  
-metrics: {
-    projects: { value: "10+", label: "Projetos Entregues", desc: "Soluções em produção" },
-    hours: { value: "2500+", label: "Horas de Código", desc: "Dedicadas à evolução" },
-    techs: { value: "15+", label: "Tecnologias", desc: "Ferramentas dominadas" },
-    community: { value: "500+", label: "Devs Impactados", desc: "Liderança em comunidade" }
+
+  metrics: {
+    projects: { value: "10+", label: "Projetos & Sistemas", desc: "Web, APIs REST & Mobile" },
+    hours: { value: "99%+", label: "Disponibilidade", desc: "SLA em infraestrutura crítica" },
+    techs: { value: "30%", label: "Menos Incidentes", desc: "Otimização de processos e TI" },
+    community: { value: "500+", label: "Devs na Comunidade", desc: "Fundador do Bahia Dev Hub" },
   },
 } as const;

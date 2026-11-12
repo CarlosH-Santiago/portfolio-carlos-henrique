@@ -24,11 +24,13 @@ export function TechMarquee() {
         Tech Stack
       </p>
       <div className="relative overflow-hidden">
-        <div className="flex animate-marquee gap-4 whitespace-nowrap">
+        <div className="flex flex-wrap motion-safe:flex-nowrap motion-safe:animate-marquee gap-4 motion-safe:whitespace-nowrap">
           {[...technologies, ...technologies].map((tech, i) => (
             <span
               key={`${tech}-${i}`}
-              className="inline-flex items-center rounded-md border border-border bg-secondary px-3 py-1.5 font-mono text-xs font-medium text-foreground transition-colors hover:border-primary/30 hover:text-primary"
+              className={`inline-flex items-center rounded-md border border-border bg-secondary px-3 py-1.5 font-mono text-xs font-medium text-foreground transition-colors hover:border-primary/30 hover:text-primary ${
+                i >= technologies.length ? "hidden motion-safe:inline-flex" : ""
+              }`}
             >
               {tech}
             </span>

@@ -11,14 +11,18 @@ export function ConstellationBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let particlesArray: Particle[] = [];
-    let animationFrameId: number;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let prefersReducedMotion = reducedMotionQuery.matches;
 
-    // Configuração do Mouse/Touch
+    let particlesArray: Particle[] = [];
+    let animationFrameId = 0;
+    let isRunning = false;
+
     const mouse = {
       x: undefined as number | undefined,
       y: undefined as number | undefined,
       radius: 150,
+      radiusSq: 150 * 150,
     };
 
     const handleMouseMove = (event: MouseEvent) => {
@@ -38,20 +42,6 @@ export function ConstellationBackground() {
       mouse.y = undefined;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handlePointerOut);
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-    window.addEventListener("touchend", handlePointerOut);
-
-    // Ajusta o tamanho do Canvas
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    };
-    window.addEventListener("resize", resizeCanvas);
-
-    // Classe da Partícula
     class Particle {
       x: number;
       y: number;
@@ -83,49 +73,51 @@ export function ConstellationBackground() {
       }
     }
 
-    // Inicializa as partículas
     function init() {
       const newParticles: Particle[] = [];
-      const numberOfParticles = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+      // Limita o teto de partículas em telas grandes e reduz em mobile para poupar GPU/bateria
+      const densityDivisor = window.innerWidth < 768 ? 18000 : 14000;
+      const numberOfParticles = Math.min(
+        90,
+        Math.floor((window.innerWidth * window.innerHeight) / densityDivisor)
+      );
 
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 1.5 + 1;
         const x = Math.random() * Math.max(10, window.innerWidth - size * 2) + size;
         const y = Math.random() * Math.max(10, window.innerHeight - size * 2) + size;
-        const speedX = (Math.random() - 0.5) * 0.5;
-        const speedY = (Math.random() - 0.5) * 0.5;
+        const speedX = (Math.random() - 0.5) * 0.45;
+        const speedY = (Math.random() - 0.5) * 0.45;
         newParticles.push(new Particle(x, y, size, speedX, speedY));
       }
       particlesArray = newParticles;
     }
 
-    // Loop de Animação
-    function animate() {
-      animationFrameId = requestAnimationFrame(animate);
+    function renderFrame(shouldUpdate: boolean) {
       if (!ctx) return;
-
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       const currentParticles = particlesArray;
       const len = currentParticles.length;
+      const maxConnectDistSq = 10000; // 100 * 100
 
       for (let i = 0; i < len; i++) {
         const p1 = currentParticles[i];
         if (!p1) continue;
 
-        p1.update();
+        if (shouldUpdate) p1.update();
         p1.draw();
 
-        // Conecta as partículas entre si
         for (let j = i + 1; j < len; j++) {
           const p2 = currentParticles[j];
           if (!p2) continue;
 
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < 100) {
+          if (distSq < maxConnectDistSq) {
+            const distance = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.strokeStyle = `rgba(161, 161, 170, ${0.2 - distance / 500})`;
             ctx.lineWidth = 0.5;
@@ -135,13 +127,13 @@ export function ConstellationBackground() {
           }
         }
 
-        // Conecta a partícula ao ponteiro
         if (mouse.x !== undefined && mouse.y !== undefined) {
           const dx = p1.x - mouse.x;
           const dy = p1.y - mouse.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < mouse.radius) {
+          if (distSq < mouse.radiusSq) {
+            const distance = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.strokeStyle = `rgba(156, 5, 148, ${0.8 - distance / mouse.radius})`;
             ctx.lineWidth = 1;
@@ -153,22 +145,82 @@ export function ConstellationBackground() {
       }
     }
 
+    function animate() {
+      if (!isRunning) return;
+      renderFrame(true);
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function startLoop() {
+      if (prefersReducedMotion || document.hidden) {
+        renderFrame(false);
+        return;
+      }
+      if (!isRunning) {
+        isRunning = true;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    }
+
+    function stopLoop() {
+      isRunning = false;
+      cancelAnimationFrame(animationFrameId);
+    }
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+      if (prefersReducedMotion || document.hidden) {
+        renderFrame(false);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    };
+
+    const handleReducedMotionChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion = e.matches;
+      if (prefersReducedMotion) {
+        stopLoop();
+        renderFrame(false);
+      } else {
+        startLoop();
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseout", handlePointerOut, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handlePointerOut, { passive: true });
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+
     resizeCanvas();
-    animate();
+    startLoop();
 
     return () => {
+      stopLoop();
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseout", handlePointerOut);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handlePointerOut);
       window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-[-1] bg-background"
     />
   );

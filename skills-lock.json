@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "reveal-hover-effect": {
+      "source": "MengTo/Skills",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/reveal-hover-effect/SKILL.md",
+      "computedHash": "8a6e95df538dacadef734d650189040dac52a7373fcaecbf78c0a8725830ab5a"
+    }
+  }
+}

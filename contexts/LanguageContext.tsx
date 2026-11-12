@@ -30,14 +30,32 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const langHtmlMap: Record<Language, string> = {
+  pt: "pt-BR",
+  en: "en",
+  es: "es",
+};
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setCurrentLanguage] = useState<Language>("pt");
 
-  // Carrega o idioma salvo no localStorage na primeira renderização
+  // Carrega o idioma via query string (?lang=en) ou localStorage na primeira renderização
   useEffect(() => {
-    const savedLang = localStorage.getItem("portfolio-lang") as Language;
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang") as Language | null;
+    if (urlLang && urlLang in dictionaryMap) {
+      setCurrentLanguage(urlLang);
+      localStorage.setItem("portfolio-lang", urlLang);
+      document.documentElement.lang = langHtmlMap[urlLang];
+      return;
+    }
+
+    const savedLang = localStorage.getItem("portfolio-lang") as Language | null;
     if (savedLang && savedLang in dictionaryMap) {
       setCurrentLanguage(savedLang);
+      document.documentElement.lang = langHtmlMap[savedLang];
+    } else {
+      document.documentElement.lang = langHtmlMap.pt;
     }
   }, []);
 
@@ -46,6 +64,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (newLang in dictionaryMap) {
       setCurrentLanguage(newLang);
       localStorage.setItem("portfolio-lang", newLang);
+      document.documentElement.lang = langHtmlMap[newLang];
     }
   };
 

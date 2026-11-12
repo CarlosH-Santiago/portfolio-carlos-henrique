@@ -69,3 +69,72 @@
 .animate-bg-grid {
   animation: pan-grid 5s linear infinite;
 }
+
+/* Registered Custom Properties & Reveal Hover Effect (Spotlight Mask) */
+@property --inner-size {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --outer-size {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.reveal-hover {
+  --reveal-x: 50%;
+  --reveal-y: 50%;
+  --reveal-radius: 0px;
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  contain: paint;
+}
+
+.reveal-hover__image--base {
+  position: relative;
+  z-index: 0;
+}
+
+.reveal-hover__image--overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  transition: --inner-size 0.2s ease-in-out, --outer-size 0.2s ease-in-out;
+  -webkit-mask-image: radial-gradient(
+    circle var(--reveal-radius, 0px) at var(--reveal-x, 50%) var(--reveal-y, 50%),
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 40%,
+    rgb(0 0 0 / 0.75) 60%,
+    rgb(0 0 0 / 0.4) 75%,
+    rgb(0 0 0 / 0.12) 88%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--reveal-radius, 0px) at var(--reveal-x, 50%) var(--reveal-y, 50%),
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 40%,
+    rgb(0 0 0 / 0.75) 60%,
+    rgb(0 0 0 / 0.4) 75%,
+    rgb(0 0 0 / 0.12) 88%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: -webkit-mask-image, mask-image;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .reveal-hover__image--overlay {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hover__image--overlay {
+    transition: none !important;
+  }
+}

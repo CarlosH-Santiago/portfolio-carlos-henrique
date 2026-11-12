@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 interface TypewriterTextProps {
   text: string;
@@ -10,13 +11,25 @@ interface TypewriterTextProps {
 
 export function TypewriterText({
   text,
-  speed = 60,
+  speed = 55,
   className,
 }: TypewriterTextProps) {
+  const prefersReducedMotion = useReducedMotion();
   const [displayed, setDisplayed] = useState("");
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayed(text);
+      setIndex(text.length);
+      return;
+    }
+    setDisplayed("");
+    setIndex(0);
+  }, [text, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
     if (index < text.length) {
       const timeout = setTimeout(() => {
         setDisplayed((prev) => prev + text[index]);
@@ -24,14 +37,18 @@ export function TypewriterText({
       }, speed);
       return () => clearTimeout(timeout);
     }
-  }, [index, text, speed]);
+  }, [index, text, speed, prefersReducedMotion]);
 
   return (
     <span className={className}>
       {displayed}
       {index < text.length && (
-        <span className="inline-block w-0.5 h-6 bg-accent animate-pulse ml-0.5 align-middle" />
+        <span
+          aria-hidden="true"
+          className="inline-block w-0.5 h-6 bg-accent animate-pulse ml-0.5 align-middle"
+        />
       )}
     </span>
   );
 }
+

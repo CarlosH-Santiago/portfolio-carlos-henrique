@@ -1,17 +1,13 @@
 "use client";
 
-import { Shield, Trophy, Server, Network, Users, Sparkles } from "lucide-react";
+import { Car, Server, Users, Sparkles, ShoppingBag, Droplets } from "lucide-react";
 import { HeroCard } from "@/components/hero-card";
 import { TechMarquee } from "@/components/tech-marquee";
 import { CommunityCard } from "@/components/community-card";
-import { HobbiesCard } from "@/components/hobbies-card";
-import { LocationCard } from "@/components/location-card";
+import { MapCard } from "@/components/map-card";
 import { GithubCard } from "@/components/github-card";
 import { AboutSection } from "@/components/about-section";
-import { MapCard } from "@/components/map-card";
 import { MusicCard } from "@/components/music-card";
-import { ShoppingBag } from "lucide-react";
-import { Droplets } from "lucide-react";
 import { ExpandableProject, type Project } from "@/components/expandable-project";
 import { ContactCard } from "@/components/contact-card";
 import { ProposalForm } from "@/components/proposal-form";
@@ -26,14 +22,39 @@ import { MetricsCard } from "./metrics-card";
 export function Portfolio() {
   const { t, language } = useLanguage();
 
-  // Lista de projetos com textos vindos do dicionário
+  // Lista de projetos alinhada ao posicionamento Full-Stack, Mobile e Arquitetura
   const myProjects: Project[] = [
+    {
+      id: "atelier",
+      title: "Atelier E-Commerce",
+      shortDesc: t.projects.items.atelier.shortDesc,
+      longDesc: t.projects.items.atelier.longDesc,
+      tags: ["React", "Node.js", "MongoDB", "JWT", "RBAC"],
+      githubUrl: "https://github.com/CarlosH-Santiago/Trabalho-de-Interfaces",
+      liveUrl: "https://atelier-puce-xi.vercel.app",
+      mainImage: "/projects/atelier-main.png",
+      gallery: ["/projects/atelier-1.png", "/projects/atelier-2.png"],
+      icon: ShoppingBag,
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "combustion",
+      title: "Combustion Analytics",
+      shortDesc: t.projects.items.combustion.shortDesc,
+      longDesc: t.projects.items.combustion.longDesc,
+      tags: ["Kotlin", "Android", "Material Design", "Architecture"],
+      githubUrl: "https://github.com/CarlosH-Santiago/CombustionCarApp_DIO_Cognizant",
+      mainImage: "/projects/combustion-main.jpg",
+      gallery: ["/projects/combustion-1.jpg", "/projects/combustion-2.jpg"],
+      icon: Car,
+      colSpan: "md:col-span-2",
+    },
     {
       id: "dra-helena",
       title: "Dra. Helena — Estética Dental",
       shortDesc: t.projects.items.draHelena.shortDesc,
       longDesc: t.projects.items.draHelena.longDesc,
-      tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "UI/UX"],
+      tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "WCAG AA"],
       githubUrl: "https://github.com/CarlosH-Santiago/Landing-Page-Estetica-Dental",
       liveUrl: "https://dra-helena-estetica-dental.vercel.app",
       mainImage: "/projects/dra-helena-main.png",
@@ -47,16 +68,15 @@ export function Portfolio() {
       colSpan: "md:col-span-2",
     },
     {
-      id: "atelier",
-      title: "Atelier E-Commerce",
-      shortDesc: t.projects.items.atelier.shortDesc,
-      longDesc: t.projects.items.atelier.longDesc,
-      tags: ["React", "Node.js", "MongoDB", "Tailwind", "JWT"],
-      githubUrl: "https://github.com/CarlosH-Santiago/Trabalho-de-Interfaces",
-      liveUrl: "https://atelier-puce-xi.vercel.app",
-      mainImage: "/projects/atelier-main.png",
-      gallery: ["/projects/atelier-1.png", "/projects/atelier-2.png"],
-      icon: ShoppingBag,
+      id: "siconecta",
+      title: "SI CONECTA",
+      shortDesc: t.projects.items.siconecta.shortDesc,
+      longDesc: t.projects.items.siconecta.longDesc,
+      tags: ["Web", "Community", "Event Mgmt"],
+      githubUrl: "https://github.com/CarlosH-Santiago/SI_CONECTA",
+      mainImage: "/projects/siconecta-main.png",
+      gallery: ["/projects/siconecta-1.png"],
+      icon: Users,
       colSpan: "md:col-span-2",
     },
     {
@@ -72,15 +92,15 @@ export function Portfolio() {
       colSpan: "md:col-span-2",
     },
     {
-      id: "siconecta",
-      title: "SI CONECTA",
-      shortDesc: t.projects.items.siconecta.shortDesc,
-      longDesc: t.projects.items.siconecta.longDesc,
-      tags: ["Web", "Community", "Event Mgmt"],
-      githubUrl: "https://github.com/CarlosH-Santiago/SI_CONECTA",
-      mainImage: "/projects/siconecta-main.png",
-      gallery: ["/projects/siconecta-1.png"],
-      icon: Users,
+      id: "api-consumer",
+      title: "Multi-API REST Consumer",
+      shortDesc: t.projects.items.apiConsumer.shortDesc,
+      longDesc: t.projects.items.apiConsumer.longDesc,
+      tags: ["Node.js", "Express", "REST API", "JavaScript"],
+      githubUrl: "https://github.com/CarlosH-Santiago",
+      mainImage: "/projects/api-main-new.png",
+      gallery: ["/projects/api-1.png"],
+      icon: Server,
       colSpan: "md:col-span-2",
     },
   ];
@@ -95,25 +115,27 @@ export function Portfolio() {
         <header className="mb-10 flex items-center justify-between">
           <p className="font-mono text-sm text-muted-foreground">
             {"~/portfolio/carlos-santiago.dev"}
-            <span className="ml-1 inline-block h-4 w-1.5 animate-pulse bg-primary align-middle" />
+            <span
+              aria-hidden="true"
+              className="ml-1 inline-block h-4 w-1.5 animate-pulse bg-primary align-middle"
+            />
           </p>
 
           {/* Seletor de idioma */}
           <LanguageToggle />
         </header>
 
-        {/* Blur Fade global — monta/desmonta toda a página ao trocar o idioma */}
+        {/* Transição leve apenas de opacidade (sem filter: blur(0px) persistente que quebra backdrop-blur no mobile) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={language}
-            initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             {/* Bento Grid */}
             <div className="grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-4">
-
               <HeroCard />
               <TechMarquee />
               <MusicCard />
@@ -135,7 +157,7 @@ export function Portfolio() {
                 <ExpandableProject
                   key={proj.id}
                   project={proj}
-                  delay={0.1 + index * 0.08}
+                  delay={(index % 2) * 0.05}
                 />
               ))}
 
@@ -149,7 +171,7 @@ export function Portfolio() {
 
               {/* Demais Cards */}
               <CommunityCard />
-              <MetricsCard/>
+              <MetricsCard />
               <ContactCard />
               <MapCard />
               <GithubCard />
@@ -169,14 +191,10 @@ export function Portfolio() {
               </div>
             </section>
 
-            <br />
-
             {/* Rodapé Global */}
             <SiteFooter />
-
           </motion.div>
         </AnimatePresence>
-
       </div>
     </main>
   );

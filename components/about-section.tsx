@@ -15,8 +15,15 @@ export function AboutSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-32 w-3/4 bg-primary/5 blur-[100px] pointer-events-none" />
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-8 border-b border-white/5 pb-4 relative z-10 overflow-x-auto scrollbar-hide">
+      <div
+        role="tablist"
+        aria-label="About tabs"
+        className="flex items-center gap-4 mb-8 border-b border-white/5 pb-4 relative z-10 overflow-x-auto scrollbar-hide"
+      >
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "about"}
           onClick={() => setActiveTab("about")}
           className={`flex items-center gap-2 px-4 py-2 text-sm font-mono transition-colors rounded-lg ${
             activeTab === "about"
@@ -24,11 +31,14 @@ export function AboutSection() {
               : "text-muted-foreground hover:text-white hover:bg-white/5"
           }`}
         >
-          <User className="h-4 w-4" />
+          <User className="h-4 w-4" aria-hidden="true" />
           {t.about.tabs.aboutMe}
         </button>
 
         <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "journey"}
           onClick={() => setActiveTab("journey")}
           className={`flex items-center gap-2 px-4 py-2 text-sm font-mono transition-colors rounded-lg ${
             activeTab === "journey"
@@ -36,7 +46,7 @@ export function AboutSection() {
               : "text-muted-foreground hover:text-white hover:bg-white/5"
           }`}
         >
-          <Route className="h-4 w-4" />
+          <Route className="h-4 w-4" aria-hidden="true" />
           {t.about.tabs.myJourney}
         </button>
       </div>

@@ -1,7 +1,7 @@
 export const en = {
   hero: {
     role: "Full Stack Software Engineer",
-    bio: "{age} years old. Transforming logic into secure, scalable solutions. Let's build your brand update.",
+    bio: "Transforming complex business logic into secure, scalable architectures and high-performance interfaces.",
     downloadCv: "Download CV",
     contactMe: "Contact Me",
   },
@@ -157,6 +157,13 @@ export const en = {
   github: {
     label: "GitHub Activity",
     tagline: "Committing code & organizing chaos.",
+    contributions: "Contributions",
+    repos: "Repos",
+    followers: "Followers",
+    less: "Less",
+    more: "More",
+    viewProfile: "View GitHub profile",
+    contributionsAlt: "Real GitHub contribution graph for CarlosH-Santiago",
   },
 
   music: {
@@ -165,6 +172,7 @@ export const en = {
   },
 
   footer: {
+    bio: "Full Stack Software Engineer dedicated to designing secure architectures, scalable microservices, and high-performance digital experiences.",
     copyright: "© 2026 by Carlos Santiago. All rights reserved.",
     status: "Available for new projects",
     navigationTitle: "Navigation",
@@ -176,15 +184,8 @@ export const en = {
     },
     socialsTitle: "Connect",
     backToTop: "Back to top",
-    builtWith: "Built with Next.js 16, React & Tailwind",
+    builtWith: "Built with Next.js, React, TypeScript & Tailwind CSS",
     terminalStatus: "⚡ status: 200 OK | system active",
-    previewSelector: "Footer Layout Preview:",
-    option1Label: "Option 1: Complete",
-    option2Label: "Option 2: Terminal",
-  },
-
-  visitorCounter: {
-    views: "views",
   },
 
   proposalForm: {
@@ -209,10 +210,10 @@ export const en = {
     },
     projectTypeOptions: {
       placeholder: "Select...",
-      webApp: "Web App",
-      mobileApp: "Mobile App",
-      landingPage: "Landing Page",
-      other: "Other",
+      webApp: "Web System / SaaS",
+      mobileApp: "Mobile App (Android/Kotlin)",
+      landingPage: "High-Conversion Landing Page",
+      other: "API / Backend Architecture",
     },
     budgetOptions: {
       placeholder: "Select...",
@@ -231,14 +232,15 @@ export const en = {
       long: "Long term (3+ months)",
       none: "No deadline",
     },
-
     submitButton: "Send Proposal",
+    successMessage: "Proposal sent successfully! I'll get back to you soon.",
+    errorMessage: "Could not send your proposal right now. Please try again or reach out via WhatsApp.",
   },
-  
-metrics: {
-    projects: { value: "10+", label: "Projects Delivered", desc: "Solutions in production" },
-    hours: { value: "2500+", label: "Coding Hours", desc: "Dedicated to evolution" },
-    techs: { value: "15+", label: "Technologies", desc: "Mastered tools & frameworks" },
-    community: { value: "500+", label: "Devs Impacted", desc: "Tech community leadership" }
+
+  metrics: {
+    projects: { value: "10+", label: "Projects & Systems", desc: "Web, REST APIs & Mobile" },
+    hours: { value: "99%+", label: "Availability", desc: "SLA in critical infrastructure" },
+    techs: { value: "30%", label: "Fewer Incidents", desc: "IT & process optimization" },
+    community: { value: "500+", label: "Devs in Community", desc: "Founder of Bahia Dev Hub" },
   },
 } as const;

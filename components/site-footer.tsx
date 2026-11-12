@@ -42,11 +42,11 @@ export function SiteFooter() {
           {/* Coluna 1: Logo & Bio */}
           <div className="md:col-span-2 flex flex-col gap-3">
             <p className="text-xs text-muted-foreground leading-relaxed max-w-md">
-              Engenheiro de Software Full Stack dedicado a criar soluções seguras, escaláveis e com design de alta performance.
+              {t.footer.bio}
             </p>
             {/* Badge Status Live */}
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-mono text-emerald-400 w-fit mt-1">
-              <span className="relative flex h-2 w-2">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
@@ -59,7 +59,7 @@ export function SiteFooter() {
             <h3 className="font-mono text-xs font-semibold text-primary uppercase tracking-wider">
               {t.footer.navigationTitle}
             </h3>
-            <nav className="flex flex-col gap-1.5 text-xs text-muted-foreground">
+            <nav aria-label={t.footer.navigationTitle} className="flex flex-col gap-1.5 text-xs text-muted-foreground">
               <a href="#about" className="hover:text-primary transition-colors w-fit">
                 {t.footer.nav.about}
               </a>
