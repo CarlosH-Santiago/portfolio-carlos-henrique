@@ -1,6 +1,6 @@
 "use client";
 
-import { Shield, Trophy, Car, Server, Network, Users, Sparkles } from "lucide-react";
+import { Shield, Trophy, Server, Network, Users, Sparkles } from "lucide-react";
 import { HeroCard } from "@/components/hero-card";
 import { TechMarquee } from "@/components/tech-marquee";
 import { CommunityCard } from "@/components/community-card";
@@ -47,30 +47,6 @@ export function Portfolio() {
       colSpan: "md:col-span-2",
     },
     {
-      id: "ecoquintal",
-      title: "EcoQuintal",
-      shortDesc: t.projects.items.ecoquintal.shortDesc,
-      longDesc: t.projects.items.ecoquintal.longDesc,
-      tags: ["React", "UI/UX", "3D Design", "Sustainability"],
-      liveUrl: "https://ecoquintal.vercel.app",
-      mainImage: "/projects/ecoquintal-main.png",
-      gallery: ["/projects/ecoquintal-1.png", "/projects/ecoquintal-2.png"],
-      icon: Droplets,
-      colSpan: "md:col-span-1",
-    },
-    {
-      id: "siconecta",
-      title: "SI CONECTA",
-      shortDesc: t.projects.items.siconecta.shortDesc,
-      longDesc: t.projects.items.siconecta.longDesc,
-      tags: ["Web", "Community", "Event Mgmt"],
-      githubUrl: "https://github.com/CarlosH-Santiago/SI_CONECTA",
-      mainImage: "/projects/siconecta-main.png",
-      gallery: ["/projects/siconecta-1.png"],
-      icon: Users,
-      colSpan: "md:col-span-1",
-    },
-    {
       id: "atelier",
       title: "Atelier E-Commerce",
       shortDesc: t.projects.items.atelier.shortDesc,
@@ -84,15 +60,27 @@ export function Portfolio() {
       colSpan: "md:col-span-2",
     },
     {
-      id: "combustion",
-      title: "Combustion Analytics",
-      shortDesc: t.projects.items.combustion.shortDesc,
-      longDesc: t.projects.items.combustion.longDesc,
-      tags: ["Kotlin", "Android", "Material Design", "Retrofit"],
-      githubUrl: "https://github.com/CarlosH-Santiago/CombustionCarApp_DIO_Cognizant",
-      mainImage: "/projects/combustion-main.jpg",
-      gallery: ["/projects/combustion-1.jpg", "/projects/combustion-2.jpg"],
-      icon: Car,
+      id: "ecoquintal",
+      title: "EcoQuintal",
+      shortDesc: t.projects.items.ecoquintal.shortDesc,
+      longDesc: t.projects.items.ecoquintal.longDesc,
+      tags: ["React", "UI/UX", "3D Design", "Sustainability"],
+      liveUrl: "https://ecoquintal.vercel.app",
+      mainImage: "/projects/ecoquintal-main.png",
+      gallery: ["/projects/ecoquintal-1.png", "/projects/ecoquintal-2.png"],
+      icon: Droplets,
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "siconecta",
+      title: "SI CONECTA",
+      shortDesc: t.projects.items.siconecta.shortDesc,
+      longDesc: t.projects.items.siconecta.longDesc,
+      tags: ["Web", "Community", "Event Mgmt"],
+      githubUrl: "https://github.com/CarlosH-Santiago/SI_CONECTA",
+      mainImage: "/projects/siconecta-main.png",
+      gallery: ["/projects/siconecta-1.png"],
+      icon: Users,
       colSpan: "md:col-span-2",
     },
   ];
